@@ -25,8 +25,8 @@ public class LocalDateDeserializer extends StdDeserializer<LocalDate> {
     public LocalDate deserialize(JsonParser jp, DeserializationContext ctxt)
             throws IOException, JsonProcessingException {
 
-        YearMonth.parse(jp.readValueAs(String.class), DateTimeFormatter.ofPattern(format));
-        return YearMonth.now().atDay(1);
+        YearMonth ym = YearMonth.parse(jp.readValueAs(String.class), DateTimeFormatter.ofPattern(format));
+        return ym.atDay(1);
     }
 
 }
