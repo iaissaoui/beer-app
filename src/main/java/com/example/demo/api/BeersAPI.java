@@ -15,7 +15,6 @@ import java.util.Collections;
 import java.util.List;
 
 @RestController
-@RequestMapping("")
 public class BeersAPI {
 
     private final String URL = "https://api.punkapi.com/v2/beers";
