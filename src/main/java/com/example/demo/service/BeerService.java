@@ -13,8 +13,12 @@ public class BeerService {
     @Autowired
     private BeerRepository beerRepository;
 
-    public Beer saveBeer(Beer b){
-        return beerRepository.save(b);
+    public Beer saveBeer(Beer beer){
+        return beerRepository.save(beer);
+    }
+
+    public List<Beer> saveBeers(List<Beer> beers){
+        return beerRepository.saveAll(beers);
     }
 
     public Beer getBeer(Beer b) throws Exception {
@@ -26,5 +30,7 @@ public class BeerService {
     public List<Beer> getAllBeers() throws Exception {
         return beerRepository.findAll();
     }
+
+
 
 }
