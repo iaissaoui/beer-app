@@ -15,6 +15,7 @@ import java.util.Collections;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api")
 public class BeersAPI {
 
     private final String URL = "https://api.punkapi.com/v2/beers";
@@ -49,8 +50,6 @@ public class BeersAPI {
 
 
         ResponseEntity<Beer[]> result = rt.exchange(URL, HttpMethod.GET,new HttpEntity<Object>(hh), Beer[].class);
-
-        //System.out.println(result.getBody());
 
         new ArrayList<>(Arrays.asList(result.getBody())).forEach(System.out::println);
 
