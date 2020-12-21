@@ -17,12 +17,8 @@ function initializeKeycloak(keycloak: KeycloakService) {
         clientId: 'beer-front-app',
       },
       initOptions: {
-        // onLoad: 'login-required',
-        // checkLoginIframe: false
         onLoad: 'login-required',
-        checkLoginIframe: false,
-         silentCheckSsoRedirectUri:
-          window.location.origin + '/assets/silent-check-sso.html'
+        checkLoginIframe: false
       },
     });
   }
