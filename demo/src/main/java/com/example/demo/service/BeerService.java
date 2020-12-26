@@ -13,12 +13,20 @@ public class BeerService {
     @Autowired
     private BeerRepository beerRepository;
 
+
+
     public Beer saveBeer(Beer beer){
         return beerRepository.save(beer);
     }
 
     public List<Beer> saveBeers(List<Beer> beers){
         return beerRepository.saveAll(beers);
+    }
+
+    public Beer getBeer(Long id) throws Exception {
+        Beer returnedBeer = beerRepository.findById(id).orElseThrow((() -> new Exception("Bad Beer ID")));
+
+        return returnedBeer;
     }
 
     public Beer getBeer(Beer b) throws Exception {

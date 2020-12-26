@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { BeerListComponent } from './beer-list/beer-list.component';
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 import { environment } from 'src/environments/environment';
+import { BeerComponent } from './beer/beer.component';
 
 
 function initializeKeycloak(keycloak: KeycloakService) {
@@ -28,6 +29,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
   declarations: [
     AppComponent,
     BeerListComponent,
+    BeerComponent,
   ],
   imports: [
     BrowserModule,

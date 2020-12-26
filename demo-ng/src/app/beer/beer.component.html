@@ -1,3 +1,5 @@
+<h1> SINGLE BEER {{ beer?.id }}</h1>
+
 <div >
     <div>
       <table>
@@ -5,7 +7,6 @@
           <tr>
             <th scope="col">#</th>
             <th scope="col">Name</th>
-            <th scope="col">Link</th>
             <th scope="col">Tagline</th>
             <th scope="col">First Brewed</th>
             <th scope="col">Description</th>
@@ -15,10 +16,9 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let beer of beers" >
+          <tr>
             <td>{{ beer?.id }}</td>
             <td>{{ beer?.name }}</td>
-            <td><a routerLink="/beers/{{beer?.id}}">{{ beer?.name }}</a></td>
             <td>{{ beer?.tagline }}</td>
             <td>{{ beer?.first_brewed }}</td>
             <td>{{ beer?.description }}</td>

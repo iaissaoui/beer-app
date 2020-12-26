@@ -16,6 +16,10 @@ export class BeerService {
    }
 
    public findAll(): Observable<Beer[]> {
-    return this.http.get<Beer[]>(this.url + '/all');
+    return this.http.get<Beer[]>(this.url + '/all/');
+  }
+
+  public findSingle(id: Number): Observable<Beer> {
+    return this.http.get<Beer>(this.url + '/'+id+'/');
   }
 }

@@ -5,6 +5,7 @@ import com.example.demo.service.BeerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
@@ -59,6 +60,11 @@ public class BeersAPI {
     public List<Beer> getAll() throws Exception {
 
         return beerService.getAllBeers();
+    }
+    @GetMapping("/{id}")
+    public Beer getSingle(@PathVariable Long id) throws Exception {
+
+        return beerService.getBeer(id);
     }
 
 
