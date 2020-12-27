@@ -7,6 +7,9 @@ import { BeerListComponent } from './beer-list/beer-list.component';
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 import { environment } from 'src/environments/environment';
 import { BeerComponent } from './beer/beer.component';
+import { AppMaterialModule } from './app-material/app-material.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AppHomeComponent } from './app-home/app-home.component';
 
 
 function initializeKeycloak(keycloak: KeycloakService) {
@@ -30,12 +33,15 @@ function initializeKeycloak(keycloak: KeycloakService) {
     AppComponent,
     BeerListComponent,
     BeerComponent,
+    AppHomeComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    KeycloakAngularModule
+    KeycloakAngularModule,
+    AppMaterialModule,
+    BrowserAnimationsModule
   ],
   providers: [
     {
