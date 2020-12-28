@@ -15,7 +15,7 @@
 
         <ng-container matColumnDef="link">
           <th mat-header-cell *matHeaderCellDef> Link </th>
-          <td mat-cell *matCellDef="let element"> <a routerLink="/beers/{{element?.id}}">{{element?.name}}</a> </td>
+          <td mat-cell *matCellDef="let element"> <button mat-button color="primary" routerLink="/beers/{{element?.id}}" >{{element?.name}}</button>  </td>
         </ng-container>
 
         <ng-container matColumnDef="tagline">
@@ -35,7 +35,7 @@
 
         <ng-container matColumnDef="image_url">
           <th mat-header-cell *matHeaderCellDef> Image </th>
-          <td mat-cell *matCellDef="let element"> <img src="{{ element?.image_url }}" width="100" height="300"/> </td>
+          <td mat-cell *matCellDef="let element"> <img class="beer-image" src="{{ element?.image_url }}" width="100" height="300"/> </td>
         </ng-container>
 
         <ng-container matColumnDef="abv">

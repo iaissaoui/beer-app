@@ -11,7 +11,9 @@ import { BeerService } from '../beer.service';
 })
 export class BeerListComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'name','tagline','link','description', 'image_url','abv','first_brewed'];
+  Columns: String[] = ['id', 'name','tagline','link','description', 'image_url','abv','first_brewed'];
+
+  displayedColumns: string[] = ['image_url','link','tagline', 'description','first_brewed','abv'];
   // MatPaginator Inputs
   length = 100;
   pageSize = 10;
@@ -35,7 +37,6 @@ export class BeerListComponent implements OnInit {
     this.beerService.findAll().subscribe(data => {
       this.beers = data;
       this.dataSource.data = data;
-      // = new MatTableDataSource<Beer>(this.beers);
     });
 
 
