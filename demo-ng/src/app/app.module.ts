@@ -6,10 +6,12 @@ import { AppComponent } from './app.component';
 import { BeerListComponent } from './beer-list/beer-list.component';
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 import { environment } from 'src/environments/environment';
-import { BeerComponent } from './beer/beer.component';
+import { BeerComponent } from './shared/beer/beer.component';
 import { AppMaterialModule } from './app-material/app-material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppHomeComponent } from './app-home/app-home.component';
+import { BeerRandomComponent } from './beer-random/beer-random.component';
+import { BeerKnownComponent } from './beer-known/beer-known.component';
 
 
 function initializeKeycloak(keycloak: KeycloakService) {
@@ -33,7 +35,9 @@ function initializeKeycloak(keycloak: KeycloakService) {
     AppComponent,
     BeerListComponent,
     BeerComponent,
-    AppHomeComponent
+    AppHomeComponent,
+    BeerRandomComponent,
+    BeerKnownComponent
   ],
   imports: [
     BrowserModule,

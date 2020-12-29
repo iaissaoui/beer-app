@@ -34,7 +34,7 @@ export class BeerListComponent implements OnInit {
   }
   ngOnInit(): void {
 
-    this.beerService.findAll().subscribe(data => {
+    this.beerService.getAll().subscribe(data => {
       this.beers = data;
       this.dataSource.data = data;
     });

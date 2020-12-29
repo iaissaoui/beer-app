@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Beer } from '../beer';
-import { BeerService } from '../beer.service';
+import { Beer } from '../../beer';
+import { BeerService } from '../../beer.service';
 import { BehaviorSubject } from 'rxjs';
 
 
@@ -12,8 +12,10 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class BeerComponent implements OnInit {
 
+  @Input() id!:number
+  @Input() random!:boolean;
   private _beer!: Beer;
-  
+
 
 
   constructor(
@@ -23,13 +25,19 @@ export class BeerComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    let id = this.route.snapshot.params['id'];
 
-    this.beerService.findSingle(id).subscribe(data => {
-      console.log(data);
-      this.beer = data;
-    });
-    
+    if(this.random){
+
+      this.beerService.getRandom().subscribe(data => {
+        this.beer = data;
+      });
+    }else{
+      this.beerService.getSingle(this.id).subscribe(data => {
+        this.beer = data;
+      });
+    }
+
+
   }
 
   public get beer(): Beer {

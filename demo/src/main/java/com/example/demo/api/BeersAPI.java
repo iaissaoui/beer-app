@@ -56,15 +56,23 @@ public class BeersAPI {
 
         return result.getBody();
     }
+
     @GetMapping("/all")
     public List<Beer> getAll() throws Exception {
 
         return beerService.getAllBeers();
     }
-    @GetMapping("/{id}")
+
+    @GetMapping("/{id:^[0-9]{1,3}$}")
     public Beer getSingle(@PathVariable Long id) throws Exception {
 
         return beerService.getBeer(id);
+    }
+
+    @GetMapping("/random")
+    public Beer getRandom() throws Exception {
+
+        return beerService.getRandomBeer();
     }
 
 

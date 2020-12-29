@@ -5,6 +5,7 @@ import com.example.demo.repo.BeerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.security.SecureRandom;
 import java.util.List;
 
 @Service
@@ -23,16 +24,8 @@ public class BeerService {
         return beerRepository.saveAll(beers);
     }
 
-    public Beer getBeer(Long id) throws Exception {
-        Beer returnedBeer = beerRepository.findById(id).orElseThrow((() -> new Exception("Bad Beer ID")));
-
-        return returnedBeer;
-    }
-
-    public Beer getBeer(Beer b) throws Exception {
-        Beer returnedBeer = beerRepository.findById(b.getId()).orElseThrow((() -> new Exception("Bad Beer ID")));
-
-        return returnedBeer;
+    public Beer getBeer(Long id) {
+        return beerRepository.findById(id).get();
     }
 
     public List<Beer> getAllBeers() throws Exception {
@@ -40,5 +33,10 @@ public class BeerService {
     }
 
 
+    public Beer getRandomBeer() {
+        SecureRandom sr = new SecureRandom();
+        Long randomId =  sr.longs(1,1,beerRepository.count()).findFirst().getAsLong();
 
+        return beerRepository.findById(randomId).get();
+    }
 }

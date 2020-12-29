@@ -15,11 +15,15 @@ export class BeerService {
     this.url = environment.api;
    }
 
-   public findAll(): Observable<Beer[]> {
+   public getAll(): Observable<Beer[]> {
     return this.http.get<Beer[]>(this.url + '/all/');
   }
 
-  public findSingle(id: Number): Observable<Beer> {
+  public getSingle(id: Number): Observable<Beer> {
     return this.http.get<Beer>(this.url + '/'+id+'/');
+  }
+
+  public getRandom(): Observable<Beer> {
+    return this.http.get<Beer>(this.url + '/random/');
   }
 }
