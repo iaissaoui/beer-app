@@ -33,3 +33,6 @@ build/
 .vscode/
 ### Node ###
 demo-ng/node_modules
+### logs ###
+logs/
+logback/

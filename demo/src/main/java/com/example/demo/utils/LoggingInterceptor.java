@@ -1,5 +1,6 @@
 package com.example.demo.utils;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpRequest;
@@ -19,14 +20,20 @@ public class LoggingInterceptor implements ClientHttpRequestInterceptor {
 
     @Override
     public ClientHttpResponse intercept(HttpRequest httpRequest, byte[] requestBody, ClientHttpRequestExecution clientHttpRequestExecution) throws IOException {
-        LOGGER.info("Request body: {}", new String(requestBody, StandardCharsets.UTF_8));
+        LOGGER.debug("Request body: {}", new String(requestBody, StandardCharsets.UTF_8));
 
         ClientHttpResponse response = clientHttpRequestExecution.execute(httpRequest, requestBody);
         InputStreamReader isr = new InputStreamReader(
                 response.getBody(), StandardCharsets.UTF_8);
+
         String body = new BufferedReader(isr).lines()
                 .collect(Collectors.joining("\n"));
-        LOGGER.info("Response body: {}", body);
+
+        if(JSONUtils.isValidJsonString(body)){
+            body = new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(body);
+        }
+
+        LOGGER.debug("Response body: {}", body);
 
         return response;
     }

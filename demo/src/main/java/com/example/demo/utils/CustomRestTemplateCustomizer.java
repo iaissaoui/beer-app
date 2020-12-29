@@ -13,9 +13,7 @@ public class CustomRestTemplateCustomizer implements RestTemplateCustomizer {
 
     @Override
     public void customize(RestTemplate restTemplate) {
-        System.out.println("customizer iqbal");
         if(LOGGER.isDebugEnabled()){
-            System.out.println("debug is on");
             restTemplate.setRequestFactory(new BufferingClientHttpRequestFactory(new SimpleClientHttpRequestFactory()));
             restTemplate.getInterceptors().add(new LoggingInterceptor());
 
