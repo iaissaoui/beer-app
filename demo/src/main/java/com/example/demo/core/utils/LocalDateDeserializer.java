@@ -1,4 +1,4 @@
-package com.example.demo.utils;
+package com.example.demo.core.utils;
 
 
 import com.fasterxml.jackson.core.JsonParser;
@@ -26,7 +26,7 @@ public class LocalDateDeserializer extends StdDeserializer<LocalDate> {
 
     @Override
     public LocalDate deserialize(JsonParser jp, DeserializationContext ctxt)
-            throws IOException, JsonProcessingException {
+            throws IOException {
 
         String toParse = jp.readValueAs(String.class);
         LocalDate ld;

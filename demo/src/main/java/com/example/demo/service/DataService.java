@@ -6,6 +6,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 @Service
 public class DataService
@@ -17,21 +18,26 @@ public class DataService
     private PunkService punkService;
 
     @Async
-    public List<Beer> importBeers(Integer page){
-        return punkService.getBeers(page);
-    }
-    @Async
     public void importBeers(){
 
         Integer page = 1;
         List<Beer> beers;
 
-        while(! (beers = punkService.getBeers(page)).isEmpty() ){
+
+
+        while(! (beers = punkService.getBeerPage(page)).isEmpty() ){
             beerService.saveBeers(beers);
             page++;
         }
 
+
     }
+
+//    @Async
+//    public CompletableFuture<List<Beer>> getBeerPage(Integer page){
+//        punkService.getBeerPage(page);
+//
+//    }
 
 
 

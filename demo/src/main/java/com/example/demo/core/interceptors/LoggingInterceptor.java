@@ -1,5 +1,6 @@
-package com.example.demo.utils;
+package com.example.demo.core.interceptors;
 
+import com.example.demo.core.utils.JSONUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

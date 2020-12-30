@@ -1,19 +1,16 @@
 package com.example.demo.service;
 
+import com.example.demo.core.errors.handlers.PunkApiErrorHandler;
 import com.example.demo.model.Beer;
-import com.example.demo.utils.LoggingInterceptor;
-import com.example.demo.utils.PunkHttpInterceptor;
+import com.example.demo.core.interceptors.PunkHttpInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.*;
-import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -27,8 +24,9 @@ public class PunkService {
     @Autowired
     RestTemplate restTemplate;
 
-    public List<Beer> getBeers(Integer page){
+    public List<Beer> getBeerPage(Integer page) {
 
+        restTemplate.setErrorHandler(new PunkApiErrorHandler());
         restTemplate.getInterceptors().add(new PunkHttpInterceptor());
         UriComponentsBuilder uriComponentsBuilder  = UriComponentsBuilder.fromHttpUrl(baseURL)
                 .queryParam("page",page)

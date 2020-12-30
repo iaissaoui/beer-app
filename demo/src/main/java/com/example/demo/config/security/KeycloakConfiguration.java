@@ -1,4 +1,4 @@
-package com.example.demo.security;
+package com.example.demo.config.security;
 
 import org.keycloak.adapters.springboot.KeycloakSpringBootConfigResolver;
 import org.keycloak.adapters.springsecurity.authentication.KeycloakAuthenticationProvider;

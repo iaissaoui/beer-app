@@ -1,6 +1,6 @@
 package com.example.demo.model;
 
-import com.example.demo.utils.LocalDateDeserializer;
+import com.example.demo.core.utils.LocalDateDeserializer;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -10,7 +10,6 @@ import lombok.*;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import java.net.URL;
 import java.time.LocalDate;
 
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
