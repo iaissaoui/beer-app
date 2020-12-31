@@ -23,10 +23,12 @@ public class PunkService {
 
     @Autowired
     RestTemplate restTemplate;
+    @Autowired
+    PunkApiErrorHandler punkApiErrorHandler;
 
     public List<Beer> getBeerPage(Integer page) {
 
-        restTemplate.setErrorHandler(new PunkApiErrorHandler());
+        restTemplate.setErrorHandler(punkApiErrorHandler);
         restTemplate.getInterceptors().add(new PunkHttpInterceptor());
         UriComponentsBuilder uriComponentsBuilder  = UriComponentsBuilder.fromHttpUrl(baseURL)
                 .queryParam("page",page)
@@ -34,6 +36,7 @@ public class PunkService {
 
         ResponseEntity<Beer[]> result = restTemplate.getForEntity(uriComponentsBuilder.toUriString(),Beer[].class);
 
+        System.out.println();
         return Arrays.asList(result.getBody());
 
 

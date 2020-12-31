@@ -48,6 +48,10 @@ public class KeycloakConfiguration extends KeycloakWebSecurityConfigurerAdapter 
                 .hasRole("beer-role")
                 .anyRequest()
                 .permitAll();
+
+        //for h2 console
+        http.csrf().disable();
+        http.headers().frameOptions().disable();
     }
 
 }

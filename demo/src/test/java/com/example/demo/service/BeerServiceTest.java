@@ -40,7 +40,7 @@ class BeerServiceTest {
         Beer beerArg = new Beer();
         beerArg.setId(1L);
         Beer beerReturn = beerService.saveBeer(beerArg);
-        Assertions.assertTrue(beerArg.equals(beerReturn));
+        Assertions.assertEquals(beerReturn, beerArg);
     }
 
     @Test
@@ -49,7 +49,7 @@ class BeerServiceTest {
         beerArg.setId(1L);
         List<Beer> listBeers = Arrays.asList(beerArg);
         List<Beer> beerReturn = beerService.saveBeers(listBeers);
-        Assertions.assertTrue(listBeers.equals(beerReturn));
+        Assertions.assertEquals(beerReturn, listBeers);
     }
 
     @Test
