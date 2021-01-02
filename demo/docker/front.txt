@@ -1,0 +1,7 @@
+in demo/demo-ng:
+
+docker build -t demo-ng:0.0.1 .
+
+run :
+
+docker run -p 4200:80 --name frontend -d --rm demo-ng:0.0.1

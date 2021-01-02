@@ -1,0 +1,4 @@
+still need to decide on an H2 replacement
+
+docker run -it -p 27017:27017 --name mongodb mongo:4.4.2
+-v mongodata:/data/db

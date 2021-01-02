@@ -1,0 +1,8 @@
+buildpacks run config
+
+mvn spring-boot:build-image -Dmaven.test.skip=true
+
+
+run
+
+docker run -p 8081:8081 --name backend -d --rm demo:0.0.1
