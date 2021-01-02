@@ -20,7 +20,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
       config: {
         url: environment.auth,
         realm: 'beer-realm',
-        clientId: 'beer-front-app',
+        clientId: 'beer-app',
       },
       initOptions: {
         onLoad: 'login-required',

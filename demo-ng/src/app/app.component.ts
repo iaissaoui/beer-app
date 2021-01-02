@@ -1,3 +1,4 @@
+import { KeycloakService } from 'keycloak-angular';
 import { Component } from '@angular/core';
 
 @Component({
@@ -7,4 +8,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'demo-ng';
+
+  constructor(private keycloakService:KeycloakService){
+
+  }
+
+  logout() {
+    this.keycloakService.logout();
+  }
+
 }

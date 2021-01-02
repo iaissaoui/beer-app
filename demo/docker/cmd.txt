@@ -1,0 +1,34 @@
+RUN
+
+docker run -p 8080:8080 -e KEYCLOAK_USER=admin -e KEYCLOAK_PASSWORD=admin --name keycloak-default quay.io/keycloak/keycloak:12.0.1do
+
+
+RUN FROM IMPORT
+
+docker run \
+    -p 8080:8080 -e KEYCLOAK_USER=admin -e KEYCLOAK_PASSWORD=admin \
+    --name keycloak-default\
+    -v "/$(pwd)/tmp/import":"/tmp/import/"\
+    quay.io/keycloak/keycloak:12.0.1\
+    -Dkeycloak.migration.action=import\
+    -Dkeycloak.migration.provider=singleFile\
+    -Dkeycloak.migration.file="/tmp/import/beer-realm.json"\
+    -Dkeycloak.migration.strategy=OVERWRITE_EXISTING
+
+EXPORT
+
+
+export keycloak realm
+
+docker exec -it 0f2 /opt/jboss/keycloak/bin/standalone.sh \
+-Djboss.socket.binding.port-offset=100 -Dkeycloak.migration.action=export \
+-Dkeycloak.migration.provider=singleFile \
+-Dkeycloak.migration.realmName=beer-realm \
+-Dkeycloak.migration.usersExportStrategy=REALM_FILE \
+-Dkeycloak.migration.file=/tmp/beer-realm.json
+
+docker copy file
+
+docker cp 0f2:/tmp/beer-realm.json beer-realm.json
+
+(cp or mount whichever)
