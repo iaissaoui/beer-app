@@ -27,10 +27,15 @@ maven-build:
 docker-build:
   stage: package
   script:
-  - cd $BACKEND_FOLDER
-  - docker build -t $DOCKER_LOGIN/$PROJECT_NAME .
   - docker login -u $DOCKER_LOGIN -p $DOCKER_TOKEN
-  - docker push $DOCKER_LOGIN/$PROJECT_NAME
+  - echo "--- build docker image [back-end] ---"
+  - cd $BACKEND_FOLDER
+  - docker build -t $DOCKER_LOGIN/$BACKEND_FOLDER .
+  - docker push $DOCKER_LOGIN/$BACKEND_FOLDER
+  - echo "--- build docker image [front-end] ---"
+  - cd ../$FRONTEND_FOLDER
+  - docker build -t $DOCKER_LOGIN/$FRONTEND_FOLDER .
+  - docker push $DOCKER_LOGIN/$FRONTEND_FOLDER
 
 #gcloud deployment example
 #k8s-deploy:
