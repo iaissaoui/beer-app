@@ -26,6 +26,9 @@ maven-build:
   artifacts:
     paths:
       - $BACKEND_FOLDER/target/*.jar
+  only:
+    changes:
+      - $BACKEND_FOLDER/**/*
 
 docker-build-backend:
   stage: package
