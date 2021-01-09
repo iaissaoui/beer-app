@@ -26,9 +26,9 @@ maven-build:
   artifacts:
     paths:
       - $BACKEND_FOLDER/target/*.jar
-  only:
-    changes:
-      - $BACKEND_FOLDER/**/*
+#  only:
+#    changes:
+#      - $BACKEND_FOLDER/**/*
 
 docker-build-backend:
   stage: package
@@ -37,9 +37,9 @@ docker-build-backend:
   - echo "--- build docker image [back-end] ---"
   - docker build -t $DOCKER_LOGIN/$BACKEND_FOLDER $BACKEND_FOLDER
   - docker push $DOCKER_LOGIN/$BACKEND_FOLDER
-  only:
-    changes:
-      - $BACKEND_FOLDER/**/*
+#  only:
+#    changes:
+#      - $BACKEND_FOLDER/**/*
 
 docker-build-frontend:
   stage: package
@@ -48,20 +48,6 @@ docker-build-frontend:
     - echo "--- build docker image [front-end] ---"
     - docker build -t $DOCKER_LOGIN/$FRONTEND_FOLDER $FRONTEND_FOLDER
     - docker push $DOCKER_LOGIN/$FRONTEND_FOLDER
-  only:
-    changes:
-      - $FRONTEND_FOLDER/**/*
-#gcloud deployment example
-#k8s-deploy:
-#  image: google/cloud-sdk
-#  stage: deploy
-#  script:
-#  - echo "$GOOGLE_KEY" > key.json
-#  - gcloud auth activate-service-account --key-file key.json
-#  - gcloud config set compute/zone europe-west1-c
-#  - gcloud config set project actuator-sample
-#  - gcloud config set container/use_client_certificate True
-#  - gcloud container clusters get-credentials actuator-sample
-#  - kubectl delete secret registry.gitlab.com
-#  - kubectl create secret docker-registry registry.gitlab.com --docker-server=https://registry.gitlab.com --docker-username=marcolenzo --docker-password=$REGISTRY_PASSWD --docker-email=lenzo.marco@gmail.com
-#  - kubectl apply -f deployment.yml
+#  only:
+#    changes:
+#      - $FRONTEND_FOLDER/**/*
