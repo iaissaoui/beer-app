@@ -1,6 +1,9 @@
 image: docker:latest
 services:
   - docker:dind
+workflow:
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
 
 variables:
   DOCKER_DRIVER: overlay
@@ -23,20 +26,31 @@ maven-build:
   artifacts:
     paths:
       - $BACKEND_FOLDER/target/*.jar
+  only:
+    changes:
+      - $BACKEND_FOLDER/**/*
 
-docker-build:
+docker-build-backend:
   stage: package
   script:
   - docker login -u $DOCKER_LOGIN -p $DOCKER_TOKEN
   - echo "--- build docker image [back-end] ---"
-  - cd $BACKEND_FOLDER
-  - docker build -t $DOCKER_LOGIN/$BACKEND_FOLDER .
+  - docker build -t $DOCKER_LOGIN/$BACKEND_FOLDER $BACKEND_FOLDER
   - docker push $DOCKER_LOGIN/$BACKEND_FOLDER
-  - echo "--- build docker image [front-end] ---"
-  - cd ../$FRONTEND_FOLDER
-  - docker build -t $DOCKER_LOGIN/$FRONTEND_FOLDER .
-  - docker push $DOCKER_LOGIN/$FRONTEND_FOLDER
+  only:
+    changes:
+      - $BACKEND_FOLDER/**/*
 
+docker-build-frontend:
+  stage: package
+  script:
+    - docker login -u $DOCKER_LOGIN -p $DOCKER_TOKEN
+    - echo "--- build docker image [front-end] ---"
+    - docker build -t $DOCKER_LOGIN/$FRONTEND_FOLDER $FRONTEND_FOLDER
+    - docker push $DOCKER_LOGIN/$FRONTEND_FOLDER
+  only:
+    changes:
+      - $FRONTEND_FOLDER/**/*
 #gcloud deployment example
 #k8s-deploy:
 #  image: google/cloud-sdk
