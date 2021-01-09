@@ -1,0 +1,57 @@
+# Docker Compose file Reference (https://docs.docker.com/compose/compose-file/)
+version: '3'
+
+#Define services
+services:
+
+  keycloak-beer:
+    image: "quay.io/keycloak/keycloak:12.0.1"
+    container_name: keycloak-beer
+    volumes:
+      - ${PWD}/keycloak/tmp/import:/tmp/import
+    ports:
+      - 8080:8080
+    #Environment variable
+    environment:
+      - KEYCLOAK_USER=admin
+      - KEYCLOAK_PASSWORD=admin
+      - KEYCLOAK_IMPORT=/tmp/import/beer-realm.json
+    networks:
+      - network-beer
+
+  #Back-end Spring Boot Application
+  backend-beer:
+    image: iaissaoui/demo
+    container_name: backend-beer
+    #Environment variables for Spring Boot Application.
+#    environment:
+#      - DB_SERVER=scrum-postgres
+    ports:
+      - 8081:8081
+    depends_on:
+      - keycloak-beer
+    networks:
+      - network-beer
+
+  #Fron-end Angular Application
+  frontend-beer:
+    image: iaissaoui/demo-ng
+    container_name: frontend-beer
+    ports:
+      - 4200:80
+    depends_on:
+      - keycloak-beer
+    networks:
+      - network-beer
+
+#Volumes
+#volumes:
+#  keycloak-realm:
+#    driver_opts:
+#      type: none
+#      device: ${PWD}/keycloak/tmp/import
+#      o: bind
+
+networks:
+  network-beer:
+    name: network-beer
