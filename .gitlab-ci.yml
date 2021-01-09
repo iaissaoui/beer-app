@@ -34,9 +34,9 @@ docker-build-backend:
   - echo "--- build docker image [back-end] ---"
   - docker build -t $DOCKER_LOGIN/$BACKEND_FOLDER $BACKEND_FOLDER
   - docker push $DOCKER_LOGIN/$BACKEND_FOLDER
-  - only:
-      changes:
-        - $BACKEND_FOLDER/**/*
+  only:
+    changes:
+      - $BACKEND_FOLDER/**/*
 
 docker-build-frontend:
   stage: package
