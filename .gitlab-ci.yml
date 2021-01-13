@@ -35,7 +35,7 @@ docker-build-backend:
   script:
   - docker login -u $DOCKER_LOGIN -p $DOCKER_TOKEN
   - echo "--- build docker image [back-end] ---"
-  - docker build -t $DOCKER_LOGIN/$BACKEND_FOLDER $BACKEND_FOLDER
+  - docker build -f dockerfile-ci -t $DOCKER_LOGIN/$BACKEND_FOLDER $BACKEND_FOLDER
   - docker push $DOCKER_LOGIN/$BACKEND_FOLDER
 #  only:
 #    changes:

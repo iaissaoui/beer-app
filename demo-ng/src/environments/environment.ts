@@ -4,10 +4,8 @@
 
 export const environment = {
   production: false,
-  // api: 'http://backend-beer:8081/api',
-  // auth: 'http://keycloak-beer:8080/auth'
-  api: 'http://localhost/api',
-  auth: 'http://localhost/auth'
+  api: 'http://localhost:11000/api',
+  auth: 'http://localhost:10000/auth'
 
 };
 

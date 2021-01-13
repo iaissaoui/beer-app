@@ -1,20 +1,16 @@
 # Docker Compose file Reference (https://docs.docker.com/compose/compose-file/)
-version: '3.8'
-
-
+version: '3'
 
 #Define services
 services:
 
   keycloak-beer:
-    #hostname: keycloak-beer
     image: "quay.io/keycloak/keycloak:12.0.1"
     container_name: keycloak-beer
-    #command: -Djboss.http.port=80
     volumes:
       - ${PWD}/keycloak/tmp/import:/tmp/import
     ports:
-      - 10000:8080
+      - 8080:8080
     #Environment variable
     environment:
       - KEYCLOAK_USER=admin
@@ -25,17 +21,13 @@ services:
 
   #Back-end Spring Boot Application
   backend-beer:
-    #hostname: backend-beer
-    image: local/${BACKEND_FOLDER}
-    build:
-      context: ./${BACKEND_FOLDER}
-      dockerfile: ./Dockerfile
+    image: iaissaoui/demo
     container_name: backend-beer
     #Environment variables for Spring Boot Application.
 #    environment:
 #      - DB_SERVER=scrum-postgres
     ports:
-      - 11000:8081
+      - 8081:8081
     depends_on:
       - keycloak-beer
     networks:
@@ -43,17 +35,12 @@ services:
 
   #Fron-end Angular Application
   frontend-beer:
-    #hostname: frontend-beer
-    image: local/${FRONTEND_FOLDER}
-    build:
-      context: ./${FRONTEND_FOLDER}
-      dockerfile: ./Dockerfile
+    image: iaissaoui/demo-ng
     container_name: frontend-beer
     ports:
       - 4200:80
     depends_on:
       - keycloak-beer
-      - backend-beer
     networks:
       - network-beer
 
