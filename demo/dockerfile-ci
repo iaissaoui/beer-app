@@ -1,5 +1,5 @@
+#this is the docker file to use in conjunction with gitlab ci-cd and build the images that get published on dockerhub
 FROM openjdk:8-jdk-alpine
-#FROM openjdk:8-oracle
 ARG JAR_FILE=target/*.jar
 COPY ${JAR_FILE} app.jar
 RUN apk update && apk --no-cache add curl

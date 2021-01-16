@@ -36,3 +36,5 @@ demo-ng/node_modules
 ### logs ###
 logs/
 logback/
+### mvn ###
+.m2

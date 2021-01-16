@@ -1,20 +1,14 @@
-#dockerfile for local dev environement
-#reuses node_modules and m2 repo
-
+#this docker file will help building fresh images that download m2 dependencies from remote repos
 # the first stage of our build will extract the layers
 FROM openjdk:8-jdk-alpine as builder
 WORKDIR application
 ARG JAR_FILE=target/*.jar
-
 COPY mvnw .
 COPY .mvn .mvn
-COPY .m2 .m2
-
 COPY pom.xml .
 COPY src src
 
-
-RUN ./mvnw install -Dmaven.repo.local=.m2 -DskipTests
+RUN ./mvnw install -DskipTests
 RUN mv ${JAR_FILE} application.jar
 RUN java -Djarmode=layertools -jar application.jar extract
 

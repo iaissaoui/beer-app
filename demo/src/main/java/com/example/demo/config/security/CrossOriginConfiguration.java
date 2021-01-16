@@ -10,8 +10,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class CrossOriginConfiguration {
 
-    //@Value("${allowedOrigins}")
-    //private String[] allowedOrigins;
+    @Value("${allowedOrigins}")
+    private String[] allowedOrigins;
 
     @Bean
     public WebMvcConfigurer corsConfigurer() {
@@ -19,8 +19,9 @@ public class CrossOriginConfiguration {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                       .allowedMethods("HEAD", "GET", "PUT", "POST", "DELETE", "PATCH")
-                        //.allowedOrigins(allowedOrigins);
+                       .allowedMethods("HEAD", "GET", "PUT", "POST", "DELETE", "PATCH","OPTIONS")
+                        .allowedHeaders("*")
+                        .allowedOrigins("*");
                 ;
             }
         };
