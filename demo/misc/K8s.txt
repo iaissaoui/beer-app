@@ -1,0 +1,7 @@
+kubectl get all --all-namespaces
+kubectl get pods --all-namespaces
+
+#kompose results
+
+kubectl apply -f C-persistentvolumeclaim.yaml -f backend-beer-deployment.yaml -f backend-beer-service.yaml -f frontend-beer-deployment.yaml -f frontend-beer-service.yaml -f keycloak-beer-deployment.yaml -f keycloak-beer-service.yaml
+kubectl apply -f C-persistentvolumeclaim.yaml -f backend-beer-deployment.yaml -f backend-beer-service.yaml -f frontend-beer-deployment.yaml -f frontend-beer-service.yaml -f keycloak-beer-deployment.yaml -f keycloak-beer-service.yaml

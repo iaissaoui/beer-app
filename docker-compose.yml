@@ -1,5 +1,5 @@
 # Docker Compose file Reference (https://docs.docker.com/compose/compose-file/)
-version: '3.8'
+version: '3'
 
 
 
@@ -21,8 +21,8 @@ services:
       - KEYCLOAK_PASSWORD=admin
       - KEYCLOAK_IMPORT=/tmp/import/beer-realm.json
       - KEYCLOAK_FRONTEND_URL='http://localhost:10000/auth'
-    networks:
-      - network-beer
+    #networks:
+      #- network-beer
 
   #Back-end Spring Boot Application
   backend-beer:
@@ -39,8 +39,8 @@ services:
       - 11000:8081
     depends_on:
       - keycloak-beer
-    networks:
-      - network-beer
+    #networks:
+      #- network-beer
 
   #Fron-end Angular Application
   frontend-beer:
@@ -55,8 +55,8 @@ services:
     depends_on:
       - keycloak-beer
       - backend-beer
-    networks:
-      - network-beer
+    #networks:
+      #- network-beer
 
 #Volumes
 #volumes:
@@ -66,6 +66,6 @@ services:
 #      device: ${PWD}/keycloak/tmp/import
 #      o: bind
 
-networks:
-  network-beer:
-    name: network-beer
+#networks:
+#  network-beer:
+#    name: network-beername
