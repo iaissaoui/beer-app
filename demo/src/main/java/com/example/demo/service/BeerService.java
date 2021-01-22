@@ -28,7 +28,7 @@ public class BeerService {
         return beerRepository.findById(id).get();
     }
 
-    public List<Beer> getAllBeers() throws Exception {
+    public List<Beer> getAllBeers()  {
         return beerRepository.findAll();
     }
 
